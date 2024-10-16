@@ -18,6 +18,7 @@
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSplitter>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -44,6 +45,8 @@ public:
     QPushButton *videosBtn;
     QPushButton *trashBtn;
     QSpacerItem *verticalSpacer;
+    QSplitter *splitter;
+    QSplitter *splitter_2;
     QListWidget *listWidget;
     QPlainTextEdit *plainTextEdit;
 
@@ -128,16 +131,22 @@ public:
 
         horizontalLayout->addLayout(verticalLayout);
 
-        listWidget = new QListWidget(centralwidget);
+        splitter = new QSplitter(centralwidget);
+        splitter->setObjectName("splitter");
+        splitter->setOrientation(Qt::Orientation::Horizontal);
+        splitter_2 = new QSplitter(splitter);
+        splitter_2->setObjectName("splitter_2");
+        splitter_2->setOrientation(Qt::Orientation::Horizontal);
+        listWidget = new QListWidget(splitter_2);
         listWidget->setObjectName("listWidget");
-
-        horizontalLayout->addWidget(listWidget);
-
-        plainTextEdit = new QPlainTextEdit(centralwidget);
+        splitter_2->addWidget(listWidget);
+        plainTextEdit = new QPlainTextEdit(splitter_2);
         plainTextEdit->setObjectName("plainTextEdit");
         plainTextEdit->setReadOnly(true);
+        splitter_2->addWidget(plainTextEdit);
+        splitter->addWidget(splitter_2);
 
-        horizontalLayout->addWidget(plainTextEdit);
+        horizontalLayout->addWidget(splitter);
 
 
         verticalLayout_2->addLayout(horizontalLayout);

@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QListWidgetItem>
 #include <QMessageBox>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,9 +32,9 @@ void MainWindow::on_downloadsBtn_clicked()
     QDir dir("/home/romavolosh/Downloads");
     foreach (QFileInfo var, dir.entryInfoList()) {
         if(var.isDir())
-            ui -> listWidget -> addItem("Dir: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
         if(var.isFile())
-            ui -> listWidget -> addItem("File: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
     }
 }
 
@@ -45,9 +46,9 @@ void MainWindow::on_documentsBtn_clicked()
     QDir dir("/home/romavolosh/Documents");
     foreach (QFileInfo var, dir.entryInfoList()) {
         if(var.isDir())
-            ui -> listWidget -> addItem("Dir: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
         if(var.isFile())
-            ui -> listWidget -> addItem("File: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
     }
 }
 
@@ -59,9 +60,9 @@ void MainWindow::on_musicBtn_clicked()
     QDir dir("/home/romavolosh/Music");
     foreach (QFileInfo var, dir.entryInfoList()) {
         if(var.isDir())
-            ui -> listWidget -> addItem("Dir: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
         if(var.isFile())
-            ui -> listWidget -> addItem("File: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
     }
 }
 
@@ -73,9 +74,9 @@ void MainWindow::on_picturesBtn_clicked()
     QDir dir("/home/romavolosh/Pictures");
     foreach (QFileInfo var, dir.entryInfoList()) {
         if(var.isDir())
-            ui -> listWidget -> addItem("Dir: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
         if(var.isFile())
-            ui -> listWidget -> addItem("File: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
     }
 }
 
@@ -87,9 +88,9 @@ void MainWindow::on_videosBtn_clicked()
     QDir dir("/home/romavolosh/Videos");
     foreach (QFileInfo var, dir.entryInfoList()) {
         if(var.isDir())
-            ui -> listWidget -> addItem("Dir: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
         if(var.isFile())
-            ui -> listWidget -> addItem("File: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
     }
 }
 
@@ -101,9 +102,9 @@ void MainWindow::on_desktopBtn_clicked()
     QDir dir("/home/romavolosh/Desktop");
     foreach (QFileInfo var, dir.entryInfoList()) {
         if(var.isDir())
-            ui -> listWidget -> addItem("Dir: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
         if(var.isFile())
-            ui -> listWidget -> addItem("File: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
     }
 }
 
@@ -115,17 +116,18 @@ void MainWindow::on_homeBtn_clicked()
     QDir dir("/home");
     foreach (QFileInfo var, dir.entryInfoList()) {
         if(var.isDir())
-            ui -> listWidget -> addItem("Dir: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
         if(var.isFile())
-            ui -> listWidget -> addItem("File: " +var.absoluteFilePath());
+            ui -> listWidget -> addItem(var.absoluteFilePath());
     }
 }
+
 
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
     QString selectedText = item->text();
-    QString filePath = selectedText.mid(6);
+    QString filePath = selectedText;
 
     QFile file(filePath);
 
@@ -141,4 +143,8 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
     file.close();
 
 }
+
+
+
+
 
